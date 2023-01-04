@@ -4,6 +4,8 @@
 # In[ ]:
 
 
+get_ipython().system('pip install yfinance')
+get_ipython().system('pip install pandas')
 import yfinance as yf
 import streamlit as st
 import pandas as pd
