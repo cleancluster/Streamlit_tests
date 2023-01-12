@@ -1,5 +1,2 @@
-yfinance==0.2.3
+yfinance==-*-
 pandas==1.5.2
-numpy==1.24.1
-altair==4.2.0
-openpyxl==3.0.10
