@@ -21,7 +21,7 @@ st.write(1234)
 
 # Example 3
 
-df = pd.read_excel("DF_test.xlsx")
+df = pd.read_excel("Data/DF_test.xlsx")
 
 st.write(df)
 
