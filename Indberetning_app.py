@@ -49,6 +49,13 @@ def clear_multi():
     st.session_state.multiselect = []
     return
 
+def choose_subsets(df, column_str_list, subset_str_list):
+    temp_df = pd.DataFrame()
+    for i in range(len(column_str_list)):
+        temp_df = pd.concat([temp_df, df[df[column_str_list[i]] == subset_str_list[i]]])
+    return temp_df
+
+
 
 # Sidebar: pt. er alt som skal i sidebar skrevet direkte i denne 'with' block.
 # Man kan godt tilføje senere uden for denne block, så skal man bare skrive st.sidebar før sin commando.
@@ -103,9 +110,14 @@ if upload_option == "Nej" and chosen_entity != None:
             st.sidebar.markdown("### Søg efter en bestemt Aktivitet ud fra titel")
             search_str = st.sidebar.text_input("Collapsed", key="Search_input", label_visibility="collapsed")
             df_altered = df_altered.loc[df_altered['Titel'].str.contains(search_str, case=False)]
+        
+        if "Aktivitetstype" in selected_features:
+            st.sidebar.markdown("### Vælg aktivitetstyper")
+            selected_types = st.sidebar.multiselect("Collapsed", list(df_altered["Aktivitetstype"].unique(), key="multiselect_types", label_visibility="collapsed"))
+            df_altered = choose_subsets(df_altered, ["Aktivitetstype" for k in range(len(selected_types))], selected_types)
+                
             
-            
-        st.sidebar.button("Reset tilvalg", on_click=clear_multi)
+        st.sidebar.button("Nulstil valg", on_click=clear_multi)
         
         st.markdown("## Nu vises df_altered med "+str(len(df_altered.index))+" dataværdier")
         st.write(df_altered)
@@ -114,7 +126,7 @@ if upload_option == "Nej" and chosen_entity != None:
     # VISUALISERINGER
     st.markdown("## Nu vises data for "+chosen_entity)
     
-    csv = convert_df(df)
+    csv = convert_df(df_altered)
     # Download knap til at downloade en csv fil som har den korrekte struktur, følgende instrukserne fra Klyngeindeberetningsstruktur-2022-final.pdf.
     st.download_button(
         "Tryk for at downloade",
@@ -125,9 +137,8 @@ if upload_option == "Nej" and chosen_entity != None:
     )
 
 
-# In[8]:
+# In[13]:
 
 
-CLEANs = df.loc[df['Titel'].str.contains("CLEAN", case=False)]
-CLEANs
+["Aktivitetstype" for k in range(6)]
 
