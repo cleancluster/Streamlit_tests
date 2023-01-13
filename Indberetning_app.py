@@ -22,7 +22,7 @@
 # - Måske vælge encoding muligheder / andre options for hvordan den endelige fil skal se ud.
 # 
 
-# In[1]:
+# In[14]:
 
 
 import numpy as np
@@ -113,7 +113,7 @@ if upload_option == "Nej" and chosen_entity != None:
         
         if "Aktivitetstype" in selected_features:
             st.sidebar.markdown("### Vælg aktivitetstyper")
-            selected_types = st.sidebar.multiselect("Collapsed", list(df_altered["Aktivitetstype"].unique(), key="multiselect_types", label_visibility="collapsed"))
+            selected_types = st.sidebar.multiselect("Collapsed", list(df_altered["Aktivitetstype"].unique()), key="multiselect_types", label_visibility="collapsed")
             df_altered = choose_subsets(df_altered, ["Aktivitetstype" for k in range(len(selected_types))], selected_types)
                 
             
