@@ -22,7 +22,7 @@
 # - Måske vælge encoding muligheder / andre options for hvordan den endelige fil skal se ud.
 # 
 
-# In[16]:
+# In[17]:
 
 
 import numpy as np
@@ -123,7 +123,7 @@ if upload_option == "Nej" and chosen_entity != None:
         
         if "Bevillingsgiver" in selected_features:
             st.sidebar.markdown("### Vælg bevillingstype")
-            df_altered = multiselect_("Bevillingsgiver", df_altered, key="multiselect_bevilling")
+            df_altered = multiselect_("Bevillingsgiver", df_altered, key_str="multiselect_bevilling")
             
             
             
