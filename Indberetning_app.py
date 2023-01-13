@@ -100,8 +100,8 @@ if upload_option == "Nej" and chosen_entity != None:
             df_altered = df_altered[(df_altered['Slutdato'] >= start_date2) & (df_altered['Slutdato'] <= end_date2)]
         
         if "Titel" in selected_features:
-            st.sidebar.markdown("### Søg efter en bestemt Aktivitet")
-            search_str = st.text_input("Collapsed", key="Search_input", label_visibility="collapsed")
+            st.sidebar.markdown("### Søg efter en bestemt Aktivitet ud fra titel")
+            search_str = st.sidebar.text_input("Collapsed", key="Search_input", label_visibility="collapsed")
             df_altered = df_altered.loc[df_altered['Titel'].str.contains(search_str, case=False)]
             
             
