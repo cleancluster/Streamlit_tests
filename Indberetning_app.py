@@ -21,6 +21,12 @@
 # #### Download muligheder for brugeren
 # - Måske vælge encoding muligheder / andre options for hvordan den endelige fil skal se ud.
 # 
+# #### PT:
+# - Fix Nan fra de forskellige kolonner, således at de ikke nødvendigvis bliver valgt fra med det samme. (potentielt erstat Nan værdi med en string i hele dataframe, og søg så efter denne string i stedet). Hvordan skal Nan indgå i den endelige fil til indberetning?
+# - Gør det dynamisk.
+# - Indlæs korrekt data DATA HÅNDTERING AF MERETES DATA, og opsæt mulighed for bruger selv at uploade data ved at følge en instruktion (video?)
+# - To vejs kommunikation mellem GitHub og StreamLit? Kan man uploade dokumenter til github fra streamlit? Hvordan vil vi ellers muliggøre at brugeren kan tilføje data gennem Streamlit?
+# 
 
 # In[17]:
 
