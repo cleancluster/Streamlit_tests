@@ -7,6 +7,10 @@
 # - Denne excel fil skal så undergå data-cleaning for at komme på det format som indberetningen skal have.
 # - Entiteten skal også visualiseres i et sådan omfang at man har overblik over hvordan fordelingen er. (se Visualiseringsmuligheder for brugeren)
 # - En download knap hvor man kan downloade CSV filen med det navn som det skal have til indberetningen for den valgte entitet.
+# - Gør det dynamisk i forhold til hvilken entitet man vælger, så det ikke er hardcodede blokke, men dynamiske funktioner.
+# - Hvis vi vælger at gå videre med at man selv skal kunne uploade data, så beskriv tydeligt hvordan den uploadede excel fil skal se ud.
+# - Husk at opdatere requirements file hvis der er brug for nye packages (det er ikke sikkert man ved præcis hvilke dependencies den mangler før man prøver i cloud service).
+# - Mulighed for at søge baseret på titel.
 # 
 # #### Visualiserings muligheder for brugeren
 # - Vælge et tidsrum for start eller slut som tager de dataværdier med kun.
@@ -18,7 +22,7 @@
 # - Måske vælge encoding muligheder / andre options for hvordan den endelige fil skal se ud.
 # 
 
-# In[68]:
+# In[1]:
 
 
 import numpy as np
@@ -95,7 +99,13 @@ if upload_option == "Nej" and chosen_entity != None:
             end_date2 = st.sidebar.date_input('Slut på interval', max_slut, min_slut, max_slut)
             df_altered = df_altered[(df_altered['Slutdato'] >= start_date2) & (df_altered['Slutdato'] <= end_date2)]
         
-        st.sidebar.button("Clear multiselect", on_click=clear_multi)
+        if "Titel" in selected_features:
+            st.sidebar.markdown("### Søg efter en bestemt Aktivitet")
+            search_str = st.text_input("Collapsed", key="Search_input", label_visibility="collapsed")
+            df_altered = df_altered.loc[df_altered['Titel'].str.contains(search_str, case=False)]
+            
+            
+        st.sidebar.button("Reset tilvalg", on_click=clear_multi)
         
         st.markdown("## Nu vises df_altered med "+str(len(df_altered.index))+" dataværdier")
         st.write(df_altered)
@@ -103,9 +113,6 @@ if upload_option == "Nej" and chosen_entity != None:
     
     # VISUALISERINGER
     st.markdown("## Nu vises data for "+chosen_entity)
-    
-    
-    
     
     csv = convert_df(df)
     # Download knap til at downloade en csv fil som har den korrekte struktur, følgende instrukserne fra Klyngeindeberetningsstruktur-2022-final.pdf.
@@ -116,15 +123,11 @@ if upload_option == "Nej" and chosen_entity != None:
         "text/csv",
         key='browser-data'
     )
-def clear_multi2():
-    st.session_state.multiselect2 = []
-    return
 
-st.markdown("Clear multiselect with stateful button")
 
-# create multiselect and automatically put it in state with its key parameter
-multi = st.multiselect("Pick an option", ["a","b","c","d"], key="multiselect2")
+# In[8]:
 
-#create your button to clear the state of the multiselect
-st.button("Clear multiselect2", on_click=clear_multi2)
+
+CLEANs = df.loc[df['Titel'].str.contains("CLEAN", case=False)]
+CLEANs
 
