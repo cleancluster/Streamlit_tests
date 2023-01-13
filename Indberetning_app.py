@@ -22,7 +22,7 @@
 # - Måske vælge encoding muligheder / andre options for hvordan den endelige fil skal se ud.
 # 
 
-# In[14]:
+# In[16]:
 
 
 import numpy as np
@@ -55,6 +55,11 @@ def choose_subsets(df, column_str_list, subset_str_list):
         temp_df = pd.concat([temp_df, df[df[column_str_list[i]] == subset_str_list[i]]])
     return temp_df
 
+def multiselect_(column_name, df, key_str):
+    df_temp = df
+    selected_types = st.sidebar.multiselect("Collapsed", list(df_temp[column_name].unique()), list(df_temp[column_name].unique()), key=key_str, label_visibility="collapsed")
+    df_temp = choose_subsets(df_temp, [column_name for k in range(len(selected_types))], selected_types)
+    return df_temp
 
 
 # Sidebar: pt. er alt som skal i sidebar skrevet direkte i denne 'with' block.
@@ -115,7 +120,12 @@ if upload_option == "Nej" and chosen_entity != None:
             st.sidebar.markdown("### Vælg aktivitetstyper")
             selected_types = st.sidebar.multiselect("Collapsed", list(df_altered["Aktivitetstype"].unique()), list(df_altered["Aktivitetstype"].unique()), key="multiselect_types", label_visibility="collapsed")
             df_altered = choose_subsets(df_altered, ["Aktivitetstype" for k in range(len(selected_types))], selected_types)
-                
+        
+        if "Bevilling" in selected_features:
+            st.sidebar.markdown("### Vælg bevillingstype")
+            df_altered = multiselect_("Bevilling", df_altered, key="multiselect_bevilling")
+            
+            
             
         st.sidebar.button("Nulstil valg", on_click=clear_multi)
         
@@ -135,10 +145,4 @@ if upload_option == "Nej" and chosen_entity != None:
         "text/csv",
         key='browser-data'
     )
-
-
-# In[13]:
-
-
-["Aktivitetstype" for k in range(6)]
 
