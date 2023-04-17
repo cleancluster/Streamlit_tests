@@ -9,7 +9,7 @@ import altair as alt
 import pandas as pd
 import streamlit as st
 import folium
-from streamlit_folium import folium_static
+from streamlit-folium import folium_static
 
 # In[2]:
 
