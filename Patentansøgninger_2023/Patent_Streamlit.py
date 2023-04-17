@@ -79,7 +79,7 @@ color_scheme = {0: 'blue', 1: 'red', 2: 'green', 3: 'yellow', 4: 'purple'}
 
 # Create a scatter plot with markers for each country, color-coded by group
 fig = px.scatter_geo(data, lat='Latitudes', lon='Longitudes', color='Cluster',
-                     color_discrete_sequence=[color_scheme[0], color_scheme[1], color_scheme[2], color_scheme[3], color_scheme[4]], hover_name='country')
+                     color_discrete_sequence=px.colors.qualitative.Plotly, hover_name='country')
 
 # Update the layout to set the map projection and the size
 fig.update_geos(projection_type='natural earth', showland=True, landcolor='lightgray',
