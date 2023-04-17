@@ -3,3 +3,4 @@ pandas==1.5.2
 openpyxl==3.0.10
 folium==0.14.0
 plotly==5.14.1
+plotly-express==0.4.1
