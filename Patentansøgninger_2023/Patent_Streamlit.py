@@ -79,7 +79,7 @@ data = pd.read_csv("Patentansøgninger_2023/subset_with_coords.csv")
 m = folium.Map(location=[data['Latitudes'].mean(), data['Longitudes'].mean()], zoom_start=2)
 
 # Define the color scheme for the groups
-color_scheme = {1: 'blue', 2: 'red', 3: 'green', 4: 'yellow', 5: 'purple'}
+color_scheme = {0: 'blue', 1: 'red', 2: 'green', 3: 'yellow', 4: 'purple'}
 
 # Add a marker for each country with a popup displaying its group
 for index, row in data.iterrows():
