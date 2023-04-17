@@ -81,12 +81,12 @@ color_map = {group: f"rgb({i*50 % 255}, {i*100 % 255}, {i*150 % 255})"
 # Create a scatter plot with markers for each country, color-coded by group
 fig = px.scatter_geo(data, lat='Latitudes', lon='Longitudes', color='Cluster',
                      color_discrete_map=color_map, hover_name='country',
-                     marker=dict(symbol='circle', size=10), opacity=0.8)
+                     symbol='circle', size=10, opacity=0.8)
 
 # Add a separate legend with a unique color for each group
 for group, color in color_map.items():
     fig.add_trace(px.scatter_geo(data[data['Cluster'] == group], lat='Latitudes', lon='Longitudes',
-                                  marker=dict(symbol='circle', size=0), showlegend=True, 
+                                  symbol='circle', size=0, showlegend=True, 
                                   legendgroup=group, name=group, opacity=1,
                                   marker_color=color).data[0])
 
