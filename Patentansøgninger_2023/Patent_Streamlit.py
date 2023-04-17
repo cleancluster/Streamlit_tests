@@ -73,7 +73,7 @@ st.markdown('Dette er en applikation, der har til formål at fremhæve forskelli
 
 
 # Load the data
-data = pd.read_csv("subset_with_coords.csv")
+data = pd.read_csv("Patentansøgninger_2023/subset_with_coords.csv")
 
 # Define the world map centered on the mean latitude and longitude
 m = folium.Map(location=[data['Latitudes'].mean(), data['Longitudes'].mean()], zoom_start=2)
