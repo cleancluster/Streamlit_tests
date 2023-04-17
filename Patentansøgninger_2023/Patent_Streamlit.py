@@ -83,7 +83,7 @@ color_scheme = {1: 'blue', 2: 'red', 3: 'green', 4: 'yellow', 5: 'purple'}
 
 # Add a marker for each country with a popup displaying its group
 for index, row in data.iterrows():
-    folium.Marker(location=[row['latitude'], row['longitude']],
+    folium.Marker(location=[row['Latitudes'], row['Longitudes']],
                   popup=row['Cluster'],
                   icon=folium.Icon(color=color_scheme[row['Cluster']])).add_to(m)
 
