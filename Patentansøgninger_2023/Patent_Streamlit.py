@@ -9,7 +9,7 @@ import altair as alt
 import pandas as pd
 import streamlit as st
 
-!pip install folium
+pip install folium
 import folium
 
 
