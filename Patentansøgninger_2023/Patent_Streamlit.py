@@ -72,7 +72,7 @@ st.markdown('Dette er en applikation, der har til formål at fremhæve forskelli
 # In[ ]:
 
 # Load the data
-data = pd.read_csv("subset_with_coords.csv")
+data = pd.read_csv("Patentansøgninger_2023/subset_with_coords.csv")
 
 # Define the color scheme for the groups
 color_scheme = {0: 'blue', 1: 'red', 2: 'green', 3: 'yellow', 4: 'purple'}
