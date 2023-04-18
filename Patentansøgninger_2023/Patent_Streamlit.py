@@ -4,12 +4,9 @@
 # In[1]:
 
 
-import numpy as np
-import altair as alt
-import pandas as pd
 import streamlit as st
+import pandas as pd
 import folium
-import plotly.express as px
 
 
 # In[2]:
@@ -76,19 +73,23 @@ st.markdown('Dette er en applikation, der har til formål at fremhæve forskelli
 # Load the data
 data = pd.read_csv("Patentansøgninger_2023/subset_with_coords.csv")
 
-# Define the world map centered on the mean latitude and longitude
-color_map = {group: f"rgb({i*50 % 255}, {i*100 % 255}, {i*150 % 255})"
-             for i, group in enumerate(data['Cluster'].unique())}
 
-# Create a scatter plot with markers for each country, color-coded by group
-fig = px.scatter_geo(data, lat='Latitudes', lon='Longitudes', color='Cluster',
-                     color_discrete_map=color_map, hover_name='country')
+# Create a map centered at (0, 0)
+m = folium.Map(location=[0, 0], zoom_start=2)
 
-# Update the layout to set the map projection and the size
-fig.update_geos(projection_type='natural earth', showland=True, landcolor='lightgray',
-                showocean=True, oceancolor='azure', showcountries=True, countrycolor='gray')
-fig.update_layout(width=800, height=600, margin={"r":0,"t":0,"l":0,"b":0})
+# Define a color scheme for the clusters
+colors = ["blue", "green", "red", "purple", "orange"]
 
-# Display the map
-st.plotly_chart(fig)
+# Add markers for each country to the map
+for i in range(len(data)):
+    lat = data.loc[i, "Latitudes"]
+    lon = data.loc[i, "Longitudes"]
+    country = data.loc[i, "country"]
+    cluster = data.loc[i, "Cluster"]
+    color = colors[cluster - 1]
+    folium.Marker(location=[lat, lon], tooltip=country, icon=folium.Icon(color=color)).add_to(m)
+
+# Display the map in the Streamlit app
+st.markdown("<h1>World Map</h1>", unsafe_allow_html=True)
+folium_static(m)
 
