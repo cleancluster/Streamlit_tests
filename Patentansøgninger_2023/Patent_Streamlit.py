@@ -90,23 +90,15 @@ for i in range(len(data)):
     color = colors[cluster - 1]
     folium.Marker(location=[lat, lon], tooltip=country, icon=folium.Icon(color=color)).add_to(m)
 
-# Add legend to the map
-legend_html = '''
-     <div style="position: fixed; 
-     bottom: 50px; left: 50px; width: 100px; height: 90px; 
-     border:2px solid grey; z-index:9999; font-size:14px;
-     background-color: white;
-     "><br><span style='padding-left: 10px;'>Legend</span><br>
-     <i class="fa fa-circle fa-1x" style="color:blue"></i><span style='padding-left: 10px;'>Cluster 1</span><br>
-     <i class="fa fa-circle fa-1x" style="color:green"></i><span style='padding-left: 10px;'>Cluster 2</span><br>
-     <i class="fa fa-circle fa-1x" style="color:red"></i><span style='padding-left: 10px;'>Cluster 3</span><br>
-     <i class="fa fa-circle fa-1x" style="color:purple"></i><span style='padding-left: 10px;'>Cluster 4</span><br>
-     <i class="fa fa-circle fa-1x" style="color:orange"></i><span style='padding-left: 10px;'>Cluster 5</span><br>
-     </div>
-     '''
-m.get_root().html.add_child(folium.Element(legend_html))
 
 # Display the map in the Streamlit app
 st.markdown("<h1>World Map</h1>", unsafe_allow_html=True)
 folium_static(m)
+
+st.markdown("<h2>Legend:</h2>", unsafe_allow_html=True)
+st.markdown('<i class="fa fa-circle fa-1x" style="color:blue"></i><span style="margin-left:10px; font-size:18px;">Cluster 1</span>', unsafe_allow_html=True)
+st.markdown('<i class="fa fa-circle fa-1x" style="color:green"></i><span style="margin-left:10px; font-size:18px;">Cluster 2</span>', unsafe_allow_html=True)
+st.markdown('<i class="fa fa-circle fa-1x" style="color:red"></i><span style="margin-left:10px; font-size:18px;">Cluster 3</span>', unsafe_allow_html=True)
+st.markdown('<i class="fa fa-circle fa-1x" style="color:purple"></i><span style="margin-left:10px; font-size:18px;">Cluster 4</span>', unsafe_allow_html=True)
+st.markdown('<i class="fa fa-circle fa-1x" style="color:orange"></i><span style="margin-left:10px; font-size:18px;">Cluster 5</span>', unsafe_allow_html=True)
 
