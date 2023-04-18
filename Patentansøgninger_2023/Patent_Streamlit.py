@@ -119,4 +119,3 @@ st.markdown('<i class="fa fa-circle fa-1x" style="color:#7fcdbb"></i><span style
 st.markdown('<i class="fa fa-circle fa-1x" style="color:#41b6c4"></i><span style="margin-left:10px; font-size:18px;">Cluster 3</span>', unsafe_allow_html=True)
 st.markdown('<i class="fa fa-circle fa-1x" style="color:#1d91c0"></i><span style="margin-left:10px; font-size:18px;">Cluster 4</span>', unsafe_allow_html=True)
 st.markdown('<i class="fa fa-circle fa-1x" style="color:#225ea8"></i><span style="margin-left:10px; font-size:18px;">Cluster 5</span>', unsafe_allow_html=True)
-``
