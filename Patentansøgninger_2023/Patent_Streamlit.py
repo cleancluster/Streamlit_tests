@@ -9,6 +9,7 @@ import altair as alt
 import pandas as pd
 import streamlit as st
 import folium
+import plotly.express as px
 
 
 # In[2]:
