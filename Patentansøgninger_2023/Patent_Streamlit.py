@@ -75,11 +75,29 @@ st.markdown('Dette er en applikation, der har til formål at fremhæve forskelli
 data = pd.read_csv("Patentansøgninger_2023/subset_with_coords.csv")
 
 
+# Load geojson data for world map
+geojson_data = "https://raw.githubusercontent.com/python-visualization/folium/master/examples/data"
+
 # Create a map centered at (0, 0)
 m = folium.Map(location=[0, 0], zoom_start=2)
 
 # Define a color scheme for the clusters
-colors = ["blue", "green", "red", "purple", "orange"]
+colors = ["#c7e9b4", "#7fcdbb", "#41b6c4", "#1d91c0", "#225ea8"]
+
+# Create a choropleth map layer
+folium.Choropleth(
+    geo_data=geojson_data + "/world-countries.json",
+    name="choropleth",
+    data=data,
+    columns=["country", "Cluster"],
+    key_on="feature.properties.name",
+    fill_color="YlGnBu",
+    fill_opacity=0.7,
+    line_opacity=0.2,
+    legend_name="Cluster",
+    highlight=True,
+    overlay=True,
+).add_to(m)
 
 # Add markers for each country to the map
 for i in range(len(data)):
@@ -90,15 +108,15 @@ for i in range(len(data)):
     color = colors[cluster - 1]
     folium.Marker(location=[lat, lon], tooltip=country, icon=folium.Icon(color=color)).add_to(m)
 
-
 # Display the map in the Streamlit app
 st.markdown("<h1>World Map</h1>", unsafe_allow_html=True)
 folium_static(m)
 
+# Add legend to the Streamlit app
 st.markdown("<h2>Legend:</h2>", unsafe_allow_html=True)
-st.markdown('<i class="fa fa-circle fa-1x" style="color:blue"></i><span style="margin-left:10px; font-size:18px;">Cluster 1</span>', unsafe_allow_html=True)
-st.markdown('<i class="fa fa-circle fa-1x" style="color:green"></i><span style="margin-left:10px; font-size:18px;">Cluster 2</span>', unsafe_allow_html=True)
-st.markdown('<i class="fa fa-circle fa-1x" style="color:red"></i><span style="margin-left:10px; font-size:18px;">Cluster 3</span>', unsafe_allow_html=True)
-st.markdown('<i class="fa fa-circle fa-1x" style="color:purple"></i><span style="margin-left:10px; font-size:18px;">Cluster 4</span>', unsafe_allow_html=True)
-st.markdown('<i class="fa fa-circle fa-1x" style="color:orange"></i><span style="margin-left:10px; font-size:18px;">Cluster 5</span>', unsafe_allow_html=True)
-
+st.markdown('<i class="fa fa-circle fa-1x" style="color:#c7e9b4"></i><span style="margin-left:10px; font-size:18px;">Cluster 1</span>', unsafe_allow_html=True)
+st.markdown('<i class="fa fa-circle fa-1x" style="color:#7fcdbb"></i><span style="margin-left:10px; font-size:18px;">Cluster 2</span>', unsafe_allow_html=True)
+st.markdown('<i class="fa fa-circle fa-1x" style="color:#41b6c4"></i><span style="margin-left:10px; font-size:18px;">Cluster 3</span>', unsafe_allow_html=True)
+st.markdown('<i class="fa fa-circle fa-1x" style="color:#1d91c0"></i><span style="margin-left:10px; font-size:18px;">Cluster 4</span>', unsafe_allow_html=True)
+st.markdown('<i class="fa fa-circle fa-1x" style="color:#225ea8"></i><span style="margin-left:10px; font-size:18px;">Cluster 5</span>', unsafe_allow_html=True)
+``
