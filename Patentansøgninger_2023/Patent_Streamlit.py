@@ -8,7 +8,7 @@ import numpy as np
 import altair as alt
 import pandas as pd
 import streamlit as st
-import plotly.express as px
+import folium
 
 
 # In[2]:
@@ -71,10 +71,11 @@ st.markdown('Dette er en applikation, der har til formål at fremhæve forskelli
 
 # In[ ]:
 
+
 # Load the data
 data = pd.read_csv("Patentansøgninger_2023/subset_with_coords.csv")
 
-# Define a dictionary to map each group to a unique color
+# Define the world map centered on the mean latitude and longitude
 color_map = {group: f"rgb({i*50 % 255}, {i*100 % 255}, {i*150 % 255})"
              for i, group in enumerate(data['Cluster'].unique())}
 
@@ -82,18 +83,10 @@ color_map = {group: f"rgb({i*50 % 255}, {i*100 % 255}, {i*150 % 255})"
 fig = px.scatter_geo(data, lat='Latitudes', lon='Longitudes', color='Cluster',
                      color_discrete_map=color_map, hover_name='country')
 
-# Add a separate legend with a unique color for each group
-for group, color in color_map.items():
-    fig.add_trace(px.scatter_geo(data[data['Cluster'] == group], lat='Latitudes', lon='Longitudes',
-                                  symbol='circle', size=0, showlegend=True, 
-                                  legendgroup=group, name=group, opacity=1,
-                                  marker_color=color).data[0])
-
 # Update the layout to set the map projection and the size
 fig.update_geos(projection_type='natural earth', showland=True, landcolor='lightgray',
                 showocean=True, oceancolor='azure', showcountries=True, countrycolor='gray')
-fig.update_layout(width=800, height=600, margin={"r":0,"t":0,"l":0,"b":0},
-                  legend=dict(orientation='h', yanchor='bottom', y=1.02, xanchor='right', x=1))
+fig.update_layout(width=800, height=600, margin={"r":0,"t":0,"l":0,"b":0})
 
 # Display the map
 st.plotly_chart(fig)
