@@ -75,8 +75,17 @@ st.markdown('Dette er en applikation, der har til formål at fremhæve forskelli
 data = pd.read_csv("Patentansøgninger_2023/subset_with_coords.csv")
 
 
-# Load geojson data for world map
+# Load geojson data for map
 geojson_data = "https://raw.githubusercontent.com/python-visualization/folium/master/examples/data"
+
+# Get list of countries in data
+countries = data["country"].unique()
+
+# Load geojson data for the selected countries
+geojson = []
+for country in countries:
+    with open(f"{country}.json", "r") as f:
+        geojson.append(f.read())
 
 # Create a map centered at (0, 0)
 m = folium.Map(location=[0, 0], zoom_start=2)
@@ -84,20 +93,22 @@ m = folium.Map(location=[0, 0], zoom_start=2)
 # Define a color scheme for the clusters
 colors = ["#c7e9b4", "#7fcdbb", "#41b6c4", "#1d91c0", "#225ea8"]
 
-# Create a choropleth map layer
-folium.Choropleth(
-    geo_data=geojson_data + "/world-countries.json",
-    name="choropleth",
-    data=data,
-    columns=["country", "Cluster"],
-    key_on="feature.properties.name",
-    fill_color="YlGnBu",
-    fill_opacity=0.7,
-    line_opacity=0.2,
-    legend_name="Cluster",
-    highlight=True,
-    overlay=True,
-).add_to(m)
+# Add a choropleth map layer for each country in the data
+for i, country in enumerate(countries):
+    country_data = data[data["country"] == country]
+    folium.Choropleth(
+        geo_data=geojson[i],
+        name="choropleth",
+        data=country_data,
+        columns=["country", "Cluster"],
+        key_on="feature.properties.name",
+        fill_color="YlGnBu",
+        fill_opacity=0.7,
+        line_opacity=0.2,
+        legend_name=f"Cluster for {country}",
+        highlight=True,
+        overlay=True,
+    ).add_to(m)
 
 # Add markers for each country to the map
 for i in range(len(data)):
