@@ -101,4 +101,4 @@ for i in range(len(data)):
 
 # Display the map in the Streamlit app
 st.markdown("<h1>World Map</h1>", unsafe_allow_html=True)
-folium_static(m)s
+folium_static(m)
