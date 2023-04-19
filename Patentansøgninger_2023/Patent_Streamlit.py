@@ -16,7 +16,7 @@ from streamlit_folium import folium_static
 # Using "with" notation 
 # converting dataframe to csv with utf-8 encoding.
 def convert_df(df):
-    return df.to_csv().encode('utf-8')
+    return df.to_csv(index=False).encode('utf-8')
 
 
 def clear_multi():
