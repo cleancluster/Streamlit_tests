@@ -72,7 +72,7 @@ st.markdown('Dette er en applikation, der har til formål at fremhæve forskelli
 with st.sidebar:
     st.markdown("## Hvilket aspekt af dansk innovation vil du kigge på?")
     # label_visibility ="collapsed" betyder at den 'radio' widget ikke har sin egen overskrift.
-    upload_option = st.radio("collapsed",
+    chosen_entity = st.radio("collapsed",
         ("Patent", "Kortlægning", "Finansiering"),
         label_visibility="collapsed"
     )
@@ -102,3 +102,14 @@ for i in range(len(data)):
 # Display the map in the Streamlit app
 st.markdown("<h1>World Map</h1>", unsafe_allow_html=True)
 folium_static(m)
+
+
+csv = convert_df(data)
+# Download knap til at downloade en csv fil som har den korrekte struktur, følgende instrukserne fra Klyngeindeberetningsstruktur-2022-final.pdf.
+st.download_button(
+    "Tryk for at downloade",
+    csv,
+    "CLEAN_"+chosen_entity+".csv",
+    "text/csv",
+    key='browser-data'
+)
