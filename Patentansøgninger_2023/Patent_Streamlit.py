@@ -93,12 +93,4 @@ for i in range(len(data)):
 
 # Display the map in the Streamlit app
 st.markdown("<h1>World Map</h1>", unsafe_allow_html=True)
-folium_static(m)
-
-st.markdown("<h2>Legend:</h2>", unsafe_allow_html=True)
-st.markdown('<i class="fa fa-circle fa-1x" style="color:blue"></i><span style="margin-left:10px; font-size:18px;">Cluster 1</span>', unsafe_allow_html=True)
-st.markdown('<i class="fa fa-circle fa-1x" style="color:green"></i><span style="margin-left:10px; font-size:18px;">Cluster 2</span>', unsafe_allow_html=True)
-st.markdown('<i class="fa fa-circle fa-1x" style="color:red"></i><span style="margin-left:10px; font-size:18px;">Cluster 3</span>', unsafe_allow_html=True)
-st.markdown('<i class="fa fa-circle fa-1x" style="color:purple"></i><span style="margin-left:10px; font-size:18px;">Cluster 4</span>', unsafe_allow_html=True)
-st.markdown('<i class="fa fa-circle fa-1x" style="color:orange"></i><span style="margin-left:10px; font-size:18px;">Cluster 5</span>', unsafe_allow_html=True)
-
+folium_static(m)s
