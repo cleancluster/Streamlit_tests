@@ -67,7 +67,15 @@ st.header('Patentdata fra 2011 til 2022')
 # Beskrivelse af applikationen og en klar instruks om hvad man skal gøre.
 st.markdown('Dette er en applikation, der har til formål at fremhæve forskellige aspekter af patentdata fået fra [..]  ')
 
-
+# Sidebar: pt. er alt som skal i sidebar skrevet direkte i denne 'with' block.
+# Man kan godt tilføje senere uden for denne block, så skal man bare skrive st.sidebar før sin commando.
+with st.sidebar:
+    st.markdown("## Hvilket aspekt af dansk innovation vil du kigge på?")
+    # label_visibility ="collapsed" betyder at den 'radio' widget ikke har sin egen overskrift.
+    upload_option = st.radio("collapsed",
+        ("Patent", "Kortlægning", "Finansiering"),
+        label_visibility="collapsed"
+    )
 # In[ ]:
 
 
