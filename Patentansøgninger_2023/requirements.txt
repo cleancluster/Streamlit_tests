@@ -1,7 +1,16 @@
-yfinance==0.2.3
-pandas==1.5.2
-openpyxl==3.0.10
-folium==0.14.0
-streamlit-folium==0.11.1
-plotly==5.14.1
+#Database connnect
+gsheetsdb==0.1.13.1
+google-auth==2.16.0
+shillelagh==1.1.5
+
+#Authenticator
+PyYAML==6.0
+bcrypt==4.0.1
+
+# Streamlit
+streamlit==1.13.0
+streamlit-authenticator==0.2.1
+streamlit-option-menu==0.3.2
 plotly-express==0.4.1
+geopandas==0.12.2
+streamlit-lottie==0.0.3
