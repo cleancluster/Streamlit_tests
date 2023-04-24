@@ -42,13 +42,7 @@ from streamlit.source_util import (
 #from shillelagh.backends.apsw.db import connect
 
 # Sets up Favicon, webpage title and layout
-favicon = Image.open(r"./assets/favicon.ico")
 
-st.set_page_config(
-    page_title = "CLEAN Insights",
-    page_icon = favicon,
-    layout="wide"
-)
 
 # Top sidebar CLEAN logo + removal of "Made with Streamlit" & Streamlit menu + no padding top and bottom
 def add_logo():
