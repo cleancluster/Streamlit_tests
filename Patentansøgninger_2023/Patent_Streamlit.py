@@ -114,7 +114,6 @@ def add_page(main_script_path_str, page_name):
     
 #If user has logged in. 
     st.header("**CLEAN INSIGHTS**")
-    st.write(f'Welcome *{st.session_state["name"]}* 👋')
 
     st.sidebar.info('This application is developed so that you can gain insights in the danish ecosystem of companies working with environmental technology.', icon="ℹ️")
 
