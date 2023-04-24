@@ -93,10 +93,7 @@ authenticator = stauth.Authenticate(
     config['preauthorized']
 )
 
-st.session_state["authentication_status"] = True
-st.session_state["name"] = "Anders Larsen"
-st.session_state["username"] = "arl"
-## name, authentication_status, username = authenticator.login('Login', 'sidebar')
+name, authentication_status, username = authenticator.login('Login', 'sidebar')
 
 ##### Helper functions #####
 # Get Lottie animation
