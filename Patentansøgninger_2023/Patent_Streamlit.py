@@ -78,23 +78,6 @@ def add_logo():
     )
 add_logo()
 
-# Login menu in sidebar
-with open('./assets/config.yaml') as file:
-    config = yaml.load(file, Loader=SafeLoader)
-
-with open(r"./assets/connected_dots_viz.html") as f: 
-    html_data = f.read()
-
-authenticator = stauth.Authenticate(
-    config['credentials'],
-    config['cookie']['name'],
-    config['cookie']['key'],
-    config['cookie']['expiry_days'],
-    config['preauthorized']
-)
-
-name, authentication_status, username = authenticator.login('Login', 'sidebar')
-
 ##### Helper functions #####
 # Get Lottie animation
 def load_lottieurl(url: str):
@@ -135,100 +118,11 @@ def add_page(main_script_path_str, page_name):
     }
     _on_pages_changed.send()
     
-delete_page("🌐 Ecosystem Insights", "Admin")
-
-#delete_page("🌐 Ecosystem Insights", "Page")
-#add_page("🌐 Ecosystem Insights", "Page")
-
-
-#If user is not logged in and has not tried loggin in
-if st.session_state["authentication_status"] == None:
-    st.sidebar.warning('Please enter your username and password. \n \n For login credentials, please contact esh@cleancluster.dk 📧')
-    st.components.v1.html(html_data, width=None, height=775, scrolling=False)
-
-
-#If user has tried loggin in, but has not entered correct credentials
-elif st.session_state["authentication_status"] == False:
-    st.sidebar.error("Username/password is incorrect. Do you want to reset your password?")
-    
-    st.components.v1.html(html_data, width=None, height=775, scrolling=False)
-    
-    #Forgot Password function
-    try:
-        username_forgot_pw, email_forgot_password, random_password = authenticator.forgot_password('Reset password', 'sidebar')
-        
-       
-        #Send email to user with new password
-        if username_forgot_pw:
-            try:
-                subject = "Your new password for CLEAN Insights"
-                sender_email = "noreply@cleancluster.dk"
-                receiver_email = email_forgot_password
-                password = st.secrets["server_password"]
-                port = 587
-                smtp_server = "smtp.office365.com"
-
-                # Create a multipart message and set headers
-                message = MIMEMultipart()
-                message["From"] = sender_email
-                message["To"] = receiver_email
-                message["Subject"] = subject
-
-                # Add body to email
-                html = """\
-                <html>
-                <body>
-                    <p>Hi,<br><br>
-                    <span>Here are your new login credentials for CLEAN Insights:</span><br><br>
-                    <span><b>Username:</b> $(username)</span><br>
-                    <span><b>New Password:</b> $(password)</span><br><br>
-                    <span>Best regards</span><br>
-                    <span>CLEAN</span>
-                    </p>
-                </body>
-                </html>
-                """
-                html = html.replace("$(username)", username_forgot_pw)
-                html = html.replace("$(password)", random_password)
-
-                part1 = MIMEText(html, "html")
-                message.attach(part1)
-
-                # Log in to server using secure context and send email
-                context = ssl.create_default_context()
-                with smtplib.SMTP(smtp_server, port) as server:
-                    server.starttls(context=context)
-                    server.login(sender_email, password)
-                    server.ehlo()
-                    server.sendmail(sender_email, receiver_email, message.as_string())
-                    server.ehlo()
-                    
-                st.sidebar.success('New password was sent to your email ✅')
-
-                #Update credetials in file
-                with open('./assets/config.yaml', 'w') as file:
-                    yaml.dump(config, file, default_flow_style=False)
-
-            #Catch email sending error
-            except Exception as e:
-                st.write(e)
-                st.sidebar.warning(e)
-        elif username_forgot_pw == False:
-            st.sidebar.error('No such username exist. For login credentials, please contact esh@cleancluster.dk 📧')
-    except Exception as e:
-        st.error(e)
-
 #If user has logged in. 
-elif st.session_state["authentication_status"]:
-    #If Emil logs in, show admin page
-    if st.session_state["name"] == "Emil Hansen":
-        add_page("🌐 Ecosystem Insights", "Admin")
-
     st.header("**CLEAN INSIGHTS**")
     st.write(f'Welcome *{st.session_state["name"]}* 👋')
 
     st.sidebar.info('This application is developed so that you can gain insights in the danish ecosystem of companies working with environmental technology.', icon="ℹ️")
-    authenticator.logout('Logout', 'sidebar')
 
     # Create a connection object.
     #credentials = service_account.Credentials.from_service_account_info(
