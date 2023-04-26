@@ -173,7 +173,7 @@ if Preferences != 'Choose an option':
     progress_bar.empty()
 
 # Reads data from CSV
-df = pd.read_csv("Miljøteknologi økosystem 1.0 –Kopi.csv")
+df = pd.read_csv("Patentansøgninger_2023/Miljøteknologi økosystem 1.0 –Kopi.csv")
 
 if Preferences == 'Show me all the data!':
 
