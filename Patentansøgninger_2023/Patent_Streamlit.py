@@ -151,9 +151,9 @@ def add_page(main_script_path_str, page_name):
 def Patent():
     st.header("Patentapplications in the period 2011 - 2022")
     st.write("This page will provide information about the applications of patents around the world")
-    df_rådata = convert_excel("Miljøteknologi rådata.xlsx", sheet_name="DATA_til_eksport_v2", pri=False)
-    df_countrycodes = convert_excel("Countrycodes.xlsx", sheet_name="Countrycodes", pri=False)
-    df_populations = convert_excel("world_population.xlsx", sheet_name="world_population", pri=False)
+    df_rådata = convert_excel("Patentansøgninger_2023/Miljøteknologi rådata.xlsx", sheet_name="DATA_til_eksport_v2", pri=False)
+    df_countrycodes = convert_excel("Patentansøgninger_2023/Countrycodes.xlsx", sheet_name="Countrycodes", pri=False)
+    df_populations = convert_excel("Patentansøgninger_2023/world_population.xlsx", sheet_name="world_population", pri=False)
     df_dk = choose_subsets(df_rådata, ["person_ctry_code"], ["DK"], True)
     col1, col2, col3, col4, col5 = st.columns(5)
 
