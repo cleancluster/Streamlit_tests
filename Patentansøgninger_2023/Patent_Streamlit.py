@@ -43,7 +43,7 @@ from streamlit.source_util import (
 
 # Sets up Favicon, webpage title and layout
 
-
+st.set_page_config(page_title="**CLEAN INSIGHTS**")
 # Top sidebar CLEAN logo + removal of "Made with Streamlit" & Streamlit menu + no padding top and bottom
 def add_logo():
     st.markdown(
@@ -193,7 +193,7 @@ sidebar_options = {
 }
 
 # Set the title and the sidebar
-st.set_page_config(page_title="**CLEAN INSIGHTS**")
+
 selection = st.sidebar.radio("Go to", list(sidebar_options.keys()))
 st.sidebar.info('This application is developed so that you can gain insights in the danish ecosystem of companies working with environmental technology.', icon="ℹ️")
 
