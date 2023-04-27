@@ -1,8 +1,4 @@
 import streamlit as st
-import streamlit.components.v1 as components
-import streamlit_authenticator as stauth
-from streamlit_option_menu import option_menu
-import time
 import pandas as pd
 import plotly.express as px
 import geopandas as gpd
@@ -30,13 +26,6 @@ from email.mime.text import MIMEText
 
 #To delete Admin page, when user is not admin
 from pathlib import Path
-from streamlit.source_util import (
-    page_icon_and_name, 
-    calc_md5, 
-    get_pages,
-    _on_pages_changed
-)
-
 #Import data from Google sheets
 #from google.oauth2 import service_account
 #from shillelagh.backends.apsw.db import connect
