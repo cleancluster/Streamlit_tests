@@ -70,7 +70,7 @@ def add_logo():
         """,
         unsafe_allow_html=True,
     )
-add_logo()
+#add_logo()
 
 ##### Helper functions #####
 def convert_excel(path, sheet_name = 'Ark1', pri = True):
