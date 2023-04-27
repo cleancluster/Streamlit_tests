@@ -73,6 +73,40 @@ def add_logo():
 add_logo()
 
 ##### Helper functions #####
+def convert_excel(path, sheet_name = 'Ark1', pri = True):
+    df = pd.read_excel(path, sheet_name)
+    if pri:
+        print('The first 5 rows of the loaded data:')
+        display_html(df.head())
+    return df
+
+def choose_headers(df, headers_list, pri):
+    temp_df = pd.DataFrame()
+    for i in range(len(headers_list)):
+        if pri:
+            print('Choosing the column "', headers_list[i], '"')
+        temp_df = pd.concat([temp_df, df[headers_list[i]]], axis = 1)
+    return temp_df
+
+def remove_nan(df):
+    df = df.dropna().reset_index(drop=True)
+    return df
+
+def choose_subsets(df, column_str_list, subset_str_list, pri):
+    temp_df = pd.DataFrame()
+    for i in range(len(column_str_list)):
+        if pri:
+            print('Choosing the rows with "', subset_str_list[i], '" in the "', column_str_list[i], '" column.')
+        temp_df = pd.concat([temp_df, df[df[column_str_list[i]] == subset_str_list[i]]])
+    return temp_df
+
+# Function to convert the dataframe back into an excel sheet.
+# More options will follow if there needs to be more sheets etc.
+# Inputs: Dataframe as converted by convert_excel, the name you wish the excel file to have (remember .xlsx)
+def convert_dataframe(df, name_str):
+    file = df.to_excel(name_str)
+
+
 # Get Lottie animation
 def load_lottieurl(url: str):
     r = requests.get(url)
@@ -115,9 +149,34 @@ def add_page(main_script_path_str, page_name):
 
 # Define function for each page
 def Patent():
-    st.header("Patentapplications")
+    st.header("Patentapplications in the period 2011 - 2022")
     st.write("This page will provide information about the applications of patents around the world")
+    df_rådata = convert_excel("Miljøteknologi rådata.xlsx", sheet_name="DATA_til_eksport_v2", pri=False)
+    df_countrycodes = convert_excel("Countrycodes.xlsx", sheet_name="Countrycodes", pri=False)
+    df_populations = convert_excel("world_population.xlsx", sheet_name="world_population", pri=False)
+    df_dk = choose_subsets(df_rådata, ["person_ctry_code"], ["DK"], True)
+    col1, col2, col3, col4, col5 = st.columns(5)
 
+    with col1:
+        st.metric("Total amount of patents mapped", len(df_rådata.index))
+        st.metric("Patents involved with water", df_rådata["Vand"].count(), help="Some patents have multiple areas that they are involved in.")
+
+    with col2:
+        st.metric("Number of different countries included:", len(df_rådata["person_ctry_code"].unique()), help="Some countries might be excluded from later conclusions due to specific tax regulations in said countries. This will also be specified therein.")
+        st.metric("Patents involved with climate adaptation", df_rådata["Klimatilpasning"].count(), help="Some patents have multiple areas that they are involved in.")
+    with col3:
+        st.metric("Patents applied for by danish companies", len(df_dk))
+        st.metric("Patents involved with Waste, Ressources and Materials", df_rådata["Affald"].count(), help="Some patents have multiple areas that they are involved in.")
+
+    with col4:
+        st.metric("Number of danish companies:", len(df_dk["psn_name"].unique()), help="The number of danish companies responsible for the patent applications. Some of which might be out of business at this point in time.")
+        st.metric("Patents involved with Air", df_rådata["Luft"].count(), help="Some patents have multiple areas that they are involved in.")
+
+    with col5:
+        st.metric("TBD", "TBD")
+        st.metric("Patents involved with Nature", df_rådata["Natur"].count(), help="Some patents have multiple areas that they are involved in.")
+
+    
 def page2():
     st.header("Page 2")
     st.write("This is the second page of the application.")
