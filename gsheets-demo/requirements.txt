@@ -1,1 +1,1 @@
-gsheetsdb==0.1.13.1
+shillelagh==1.2.4
