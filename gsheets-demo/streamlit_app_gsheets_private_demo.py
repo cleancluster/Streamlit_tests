@@ -11,7 +11,7 @@ credentials = service_account.Credentials.from_service_account_info(
         "https://www.googleapis.com/auth/spreadsheets",
     ],
 )
-conn = connect(credentials=credentials)
+conn = connect(credentials)
 
 # Perform SQL query on the Google Sheet.
 # Uses st.cache_data to only rerun when the query changes or after 10 min.
