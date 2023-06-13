@@ -6,6 +6,7 @@ import toml
 #print(st.secrets["gcp_service_account"])
 #data = toml.load(st.secrets["gcp_service_account"])
 st.write(st.secrets["gcp_service_account"])
+st.write(dict(st.secrets["gcp_service_account"]))
 connection = connect(
     ":memory:",
     adapter_kwargs={
