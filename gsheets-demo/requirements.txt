@@ -1,1 +1,2 @@
 shillelagh==1.2.4
+google-auth==2.19.1
