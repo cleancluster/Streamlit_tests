@@ -5,13 +5,13 @@ import toml
 
 #print(st.secrets["gcp_service_account"])
 #data = toml.load(st.secrets["gcp_service_account"])
-st.write(st.secrets["gcp_service_account"])
-st.write(dict(st.secrets["gcp_service_account"]))
+#st.write(st.secrets["gcp_service_account"])
+#st.write(dict(st.secrets["gcp_service_account"]))
 connection = connect(
     ":memory:",
     adapter_kwargs={
         "gsheetsapi": {
-            "service_account_file": st.secrets["gcp_service_account"],
+            "service_account_file": dict(st.secrets["gcp_service_account"]),
         },
     },
 )
