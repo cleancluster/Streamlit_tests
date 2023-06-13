@@ -1,11 +1,15 @@
 # streamlit_app.py
 
-import streamlit as st
-from streamlit_gsheets import GSheetsConnection
+from shillelagh.backends.apsw.db import connect
 
-url = "https://docs.google.com/spreadsheets/d/1-FQwy2py4xRr1WBp9B9V7yy0pbhCTbVCEZGD4cpUvzM/edit#gid=0"
 
-conn = st.experimental_connection("gsheets", type=GSheetsConnection)
+if __name__ == "__main__":
+    connection = connect(":memory:")
+    cursor = connection.cursor()
 
-data = conn.read(spreadsheet=url, usecols=[0, 1])
-st.dataframe(data)
+    SQL = """
+    SELECT *
+    FROM "https://docs.google.com/spreadsheets/d/1_rN3lm0R_bU3NemO0s9pbFkY5LQPcuy1pscv8ZXPtg8/edit#gid=1648320094"
+    """
+    for row in cursor.execute(SQL):
+        print(row)
