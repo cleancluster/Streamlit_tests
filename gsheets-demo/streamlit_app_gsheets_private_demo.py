@@ -9,9 +9,10 @@ import toml
 connection = connect(
     ":memory:",
     adapter_kwargs={
-
-            **st.secrets.gcp_service_account,
+        "gsheetsapi": {
+            "service_account_file": st.secrets["gcp_service_account"],
         },
+    },
 )
 cursor = connection.cursor()
 
