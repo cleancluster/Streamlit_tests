@@ -1,12 +1,16 @@
 import streamlit as st
 from google.oauth2 import service_account
 from shillelagh.backends.apsw.db import connect
+import toml
+
+
+data = toml.load(st.secrets["gcp_service_account"])
 
 connection = connect(
     ":memory:",
     adapter_kwargs={
         "gsheetsapi": {
-            "service_account_file": st.secrets["gcp_service_account"],
+            "service_account_file": data,
             "service_account_info": {
                 "type": "service_account",
             },
