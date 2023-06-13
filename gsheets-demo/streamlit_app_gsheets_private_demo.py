@@ -19,7 +19,7 @@ cursor = connection.cursor()
 
 SQL = """
 SELECT *
-FROM "https://docs.google.com/spreadsheets/d/1-FQwy2py4xRr1WBp9B9V7yy0pbhCTbVCEZGD4cpUvzM/edit#gid=0"
+FROM st.secrets["private_gsheets_url"]
 """
 for row in cursor.execute(SQL):
     print(row)
