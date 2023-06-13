@@ -6,7 +6,7 @@ connection = connect(
     ":memory:",
     adapter_kwargs={
         "gsheetsapi": {
-            "service_account_file": "",
+            "service_account_file": st.secrets["gcp_service_account"],
             "service_account_info": {
                 "type": "service_account",
                 ...
