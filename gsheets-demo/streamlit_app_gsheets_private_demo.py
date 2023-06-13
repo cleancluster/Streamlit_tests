@@ -3,18 +3,14 @@ from google.oauth2 import service_account
 from shillelagh.backends.apsw.db import connect
 import toml
 
-print(st.secrets["gcp_service_account"])
-data = toml.load(st.secrets["gcp_service_account"])
+#print(st.secrets["gcp_service_account"])
+#data = toml.load(st.secrets["gcp_service_account"])
 
 connection = connect(
     ":memory:",
     adapter_kwargs={
         "gsheetsapi": {
-            "service_account_file": data,
-            "service_account_info": {
-                "type": "service_account",
-            },
-            "subject": "user@example.com",
+            "service_account_file": toml.load(st.secrets["gcp_service_account"]),
         },
     },
 )
