@@ -9,7 +9,6 @@ connection = connect(
             "service_account_file": st.secrets["gcp_service_account"],
             "service_account_info": {
                 "type": "service_account",
-                ...
             },
             "subject": "user@example.com",
         },
