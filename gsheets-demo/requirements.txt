@@ -1,1 +1,3 @@
-shillelagh==1.2.4
+streamlit==1.22
+git+https://github.com/sfc-gh-jcarroll/st-connection-prpr.git#subdirectory=gsheets_connection
+pandasql  # this is for example/st_app.py only
