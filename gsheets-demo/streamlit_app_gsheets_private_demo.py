@@ -6,7 +6,7 @@ connection = connect(
     ":memory:",
     adapter_kwargs={
         "gsheetsapi": {
-            "service_account_file": "C:\Users\Nedan\OneDrive\Dokumenter\GitHub\CLEAN\Streamlit_tests\gsheets-demo\plasma-bounty-389611-04983ce47950",
+            "service_account_file": "",
             "service_account_info": {
                 "type": "service_account",
                 ...
