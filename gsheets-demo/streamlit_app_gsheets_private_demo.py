@@ -3,7 +3,7 @@ from google.oauth2 import service_account
 from shillelagh.backends.apsw.db import connect
 import toml
 
-
+print(st.secrets["gcp_service_account"])
 data = toml.load(st.secrets["gcp_service_account"])
 
 connection = connect(
