@@ -17,4 +17,4 @@ cursor = conn.cursor()
 
 query = "SELECT * FROM a_table"
 for row in cursor.execute(query):
-    st.write(f"{row.name} has a :{row.pet}:")
+    print(row)
