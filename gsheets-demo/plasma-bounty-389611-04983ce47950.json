@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "plasma-bounty-389611",
+  "private_key_id": "04983ce47950211b9c63e22e6f91676a77ac313b",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCqxNSi5uiF9e7M\nqu8+5nFfpCldK/XFnpuRIz7Y0LOqt1eorMh6fCHi+28BDyLItqjkImqXmyy7dswN\nMRGlS0wHF3VERw5D9Lls6iSqrclO1ZHKVlFYIPDrqumXtcwzePfz1Z2vP7TCP87a\nz78fjdXCkFOG9PdhD3lGTm7KZGj8ZdQmzgfCSxAdDb7QN/6alThAKoH3Dbcx6WiV\nxFPW2umJYX6v91Ovcu9Yv0y+hJlC6VocTqK/WDYtAw5UugU0Wl8/CYjGoxlepzPo\nv6CYOzvdS3Iepq+GuZqiWqQx8UTsfK15DtVTNcS3tbagCidnkCxztLFXP6UI+0jZ\nWf/5cSBpAgMBAAECggEALu0BpXYgZVdsdI9wSO+YLfj1aOYAlnp8M0jlJz1KcdoJ\n248HVCkyQqZnHXpkS5VuGaqfceOxSh5d+i4GtE5ZqQU4Mzf3YpMoNRauVryEugYU\nFu7bUYVTzt7ba9YINAjE0htcRmESMeLI2/YEhg46tElmuoosRF61K6234iPveZOq\n1sMmqVh7Ijz+zR9CS1tPydoFwNVHOO9USndkMfhNy65TpLOEr5fOWLkhB6MqR2St\n607YyGLVLpBS3dTkU23Htk+hk3wUhjUOYUMZIICps255V+6KZxmhv+aNWtaUBWRW\naS/XqsvVhqMp2/32qnrfNvYvoE++vQFDa/PG6V4wNQKBgQDZPsOKEsW6snIc5C82\njNkx+3twBea9/KL8RGLOKNcBJW9SoV/2mWUC3F2BF6Qll9kxPg0pPL89vRiPow4j\nJHxlv/7TNTGsbPF2ard4mAtPMtAOWneclBDjJfE2wBfwdmzo+nOJdVVQetjl1sx3\nOcZtv5PxEbg4FCLJUkQrOOEP7wKBgQDJO5Gy+JWhrzyW9eJv99IDYVvCy1bvOd95\nWya4FNceiTdd3cnZptBqc+OKVjQGD85lZXWD0BNMM4I/1SQ9fTGr0tXGFZ6+Q8ed\nTgVHfi3CyXClcti9qYzbdPV0/MYyyTcErrxDZk5q5+reBKYA6haKEUJ5pNJlOhoJ\nuVU326B9JwKBgQCeeDgvOe5ed9jh1lnSUwAEg8vRNZzRrb4+gqwIcqYTwfjor6rO\nuaqDYbgbeOFWQuQ+FWOIVzWxlYSbEng3jl/n4RvDeaQYgQfKN6JKJ67oQMqgDcH+\nx8thxsWkCI/t6pUbhcZN2Pc408PwNLXFqrFiUUNbsG9PCPEvJgFv/fe+pQKBgQCa\nUXZQO1X0YgAi/HkjyHZjZTwLTAhk+Iqp8/7jWAgIQM4Wy8jJgqV9nVW3dpf6thBf\nrcjKxrylyTJvZTKffOykidCqUVYlLrFbrsNZqifJotUh68rO18FPYogBqP8NX0Uz\n8BQr0777ONLiY8oyFVInm0jRJFa8jiv9nQT/CwwuLQKBgDrN2l0z/FlHMDxz6DgZ\nwSqu65bwFIyThMsCqu/yYi6UBcqq2EmW3KnTSIIK7inOXqOtvJU98o5rBJLk/wdA\nIOA33jvhKXlbn4ODJPSs82xvvwmXcZDiK79EJFQlpuqbnl9e0D6aLQOOWAIYjt3W\n+3Ao15W7/CEi/vLT70Ho1Z9K\n-----END PRIVATE KEY-----\n",
+  "client_email": "service-acc@plasma-bounty-389611.iam.gserviceaccount.com",
+  "client_id": "100533026899209014710",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/service-acc%40plasma-bounty-389611.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
