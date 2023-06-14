@@ -1,25 +1,35 @@
 import streamlit as st
 from google.oauth2 import service_account
 from shillelagh.backends.apsw.db import connect
-import toml
 
-#print(st.secrets["gcp_service_account"])
-#data = toml.load(st.secrets["gcp_service_account"])
-#st.write(st.secrets["gcp_service_account"])
-st.write(type(dict(st.secrets["gcp_service_account"])))
-connection = connect(
-    ":memory:",
-    adapter_kwargs={
-        "gsheetsapi": {
-            "service_account_file": dict(st.secrets["gcp_service_account"]),
-        },
-    },
-)
-cursor = connection.cursor()
+sheet_url = st.secrets["private_gsheets_url"]
 
-SQL = """
-SELECT *
-FROM st.secrets["private_gsheets_url"]
-"""
-for row in cursor.execute(SQL):
-    print(row)
+def create_connection():
+     if 'email' in st.session_state:
+          credentials = service_account.Credentials.from_service_account_info(
+            st.secrets["gcp_service_account"], 
+            scopes=["https://www.googleapis.com/auth/spreadsheets",],)
+          connection = connect(":memory:", adapter_kwargs={
+            "gsheetsapi" : { 
+            "service_account_info" : {
+                "type" : st.secrets["gcp_service_account"]["type"],
+                "project_id" : st.secrets["gcp_service_account"]["project_id"],
+                "private_key_id" : st.secrets["gcp_service_account"]["private_key_id"],
+                "private_key" : st.secrets["gcp_service_account"]["private_key"],
+                "client_email" : st.secrets["gcp_service_account"]["client_email"],
+                "client_id" : st.secrets["gcp_service_account"]["client_id"],
+                "auth_uri" : st.secrets["gcp_service_account"]["auth_uri"],
+                "token_uri" : st.secrets["gcp_service_account"]["token_uri"],
+                "auth_provider_x509_cert_url" : st.secrets["gcp_service_account"]["auth_provider_x509_cert_url"],
+                "client_x509_cert_url" : st.secrets["gcp_service_account"]["client_x509_cert_url"],
+                }
+            },
+        })
+     return connection.cursor()
+
+def execute_query(query):
+     cursor = create_connection()
+     rows = cursor.execute(query)
+     rows = rows.fetchall()
+
+execute_query("your query")
