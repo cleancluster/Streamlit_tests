@@ -1,35 +1,27 @@
 import streamlit as st
-from google.oauth2 import service_account
-from shillelagh.backends.apsw.db import connect
+import gspread
+import pandas as pd
+from google.oauth2.service_account import Credentials
 
-sheet_url = st.secrets["private_gsheets_url"]
+scopes = [
+    "https://www.googleapis.com/auth/spreadsheets",
+]
 
-def create_connection():
-     if 'email' in st.session_state:
-          credentials = service_account.Credentials.from_service_account_info(
-            st.secrets["gcp_service_account"], 
-            scopes=["https://www.googleapis.com/auth/spreadsheets",],)
-          connection = connect(":memory:", adapter_kwargs={
-            "gsheetsapi" : { 
-            "service_account_info" : {
-                "type" : st.secrets["gcp_service_account"]["type"],
-                "project_id" : st.secrets["gcp_service_account"]["project_id"],
-                "private_key_id" : st.secrets["gcp_service_account"]["private_key_id"],
-                "private_key" : st.secrets["gcp_service_account"]["private_key"],
-                "client_email" : st.secrets["gcp_service_account"]["client_email"],
-                "client_id" : st.secrets["gcp_service_account"]["client_id"],
-                "auth_uri" : st.secrets["gcp_service_account"]["auth_uri"],
-                "token_uri" : st.secrets["gcp_service_account"]["token_uri"],
-                "auth_provider_x509_cert_url" : st.secrets["gcp_service_account"]["auth_provider_x509_cert_url"],
-                "client_x509_cert_url" : st.secrets["gcp_service_account"]["client_x509_cert_url"],
-                }
-            },
-        })
-     return connection.cursor()
+skey = st.secrets["gcp_service_account"]
+credentials = Credentials.from_service_account_info(
+    skey,
+    scopes=scopes,
+)
+client = gspread.authorize(credentials)
 
-def execute_query(query):
-     cursor = create_connection()
-     rows = cursor.execute(query)
-     rows = rows.fetchall()
 
-execute_query("your query")
+# Perform SQL query on the Google Sheet.
+# Uses st.cache_data to only rerun when the query changes or after 10 min.
+@st.cache_data(ttl=600)
+def load_data(url, sheet_name="Transactions"):
+    sh = client.open_by_url(url)
+    df = pd.DataFrame(sh.worksheet(sheet_name).get_all_records())
+    return df
+
+dataframe = load_data(st.secrets["private_gsheets_url"], sheet_name="Sheet1")
+st.experimental_data_editor(dataframe)
