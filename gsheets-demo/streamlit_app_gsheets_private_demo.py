@@ -25,7 +25,7 @@ def load_data(url, sheet_name="Transactions"):
 
 dataframe = load_data(st.secrets["private_gsheets_url"], sheet_name="Sheet1")
 worksheet = st.session_state.sh.get_worksheet(0)
-st.button("Test update", on_click=worksheet.update("A2", "CHANGED")) #Fejl i authorization => Google siger også at jeg har en blottet fil i GitHub med Key, men den kan jeg ikke se. ("plasma-bounty"...)
+st.button("Test update", on_click=worksheet.update('A1:B2', [[1, 2], [3, 4]])) #Fejl i authorization => Google siger også at jeg har en blottet fil i GitHub med Key, men den kan jeg ikke se. ("plasma-bounty"...)
 
 
 st.experimental_data_editor(dataframe)
