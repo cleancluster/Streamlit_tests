@@ -25,7 +25,15 @@ def load_data(url, sheet_name="Transactions"):
 
 dataframe = load_data(st.secrets["private_gsheets_url"], sheet_name="Sheet1")
 worksheet = st.session_state.sh.get_worksheet(0)
-st.button("Test update", on_click=worksheet.update('A1:B2', [[1, 2], [3, 4]])) #Fejl i authorization => Google siger også at jeg har en blottet fil i GitHub med Key, men den kan jeg ikke se. ("plasma-bounty"...)
+def on_click_button():
+    cell_list = worksheet.range('A1:A7')
+    cell_values = [1,2,3,4,5,6,7]
+
+    for i, val in enumerate(cell_values):  #gives us a tuple of an index and value
+        cell_list[i].value = val    #use the index on cell_list and the val from cell_values
+
+    worksheet.update_cells(cell_list) #Fejl i authorization => Google siger også at jeg har en blottet fil i GitHub med Key, men den kan jeg ikke se. ("plasma-bounty"...)
+st.button("test af insertion", on_click=on_click_button)
 
 
 st.experimental_data_editor(dataframe)
