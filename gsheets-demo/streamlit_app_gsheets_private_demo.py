@@ -22,7 +22,7 @@ def load_data(url, sheet_name="Transactions"):
     sh = client.open_by_url(url)
     df = pd.DataFrame(sh.worksheet(sheet_name).get_all_records())
     worksheet = sh.get_worksheet(0)
-    st.button("Test update", on_click=worksheet.update("A2", "CHANGED"))
+    #st.button("Test update", on_click=worksheet.update("A2", "CHANGED")) Fejl i authorization => Google siger også at jeg har en blottet fil i GitHub med Key, men den kan jeg ikke se. ("plasma-bounty"...)
     return df
 
 dataframe = load_data(st.secrets["private_gsheets_url"], sheet_name="Sheet1")
