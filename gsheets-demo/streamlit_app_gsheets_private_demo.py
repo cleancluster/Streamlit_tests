@@ -21,6 +21,7 @@ client = gspread.authorize(credentials)
 def load_data(url, sheet_name="Transactions"):
     sh = client.open_by_url(url)
     df = pd.DataFrame(sh.worksheet(sheet_name).get_all_records())
+    st.button("Test update", on_click=sh.update("A2", "CHANGED"))
     return df
 
 dataframe = load_data(st.secrets["private_gsheets_url"], sheet_name="Sheet1")
